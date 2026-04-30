@@ -102,9 +102,8 @@ const Header = () => {
 
 const Navigation = ({ isHomePage, isScrolled }: { isHomePage: boolean; isScrolled: boolean }) => {
   const router = useRouter()
-  const pathname = usePathname()
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
-  const dropdownRef = useRef<HTMLDivElement>(null)
+  const dropdownRef = useRef<HTMLLIElement>(null)
 
   // Close dropdown when clicking outside
   useEffect(() => {
