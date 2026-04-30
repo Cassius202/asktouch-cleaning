@@ -1,5 +1,6 @@
 "use client";
 
+import {Metadata} from 'next';
 import { useState, useEffect } from "react";
 import { 
   Calendar, 
@@ -15,6 +16,30 @@ import Link from "next/link";
 import { cn } from "@/utils/cn";
 import { info } from "@/constants/data";
 import { GridTexture } from "@/utils/GridTexture";
+
+export const metadata: Metadata = {
+  title: 'Share Your Experience | AskTouch',
+  description: 'Help us improve by sharing your honest feedback. Your review helps us serve you better.',
+  openGraph: {
+    title: 'Share Your AskTouch Experience',
+    description: 'Tell us about your cleaning or pest control service. Your feedback matters!',
+    url: `${process.env.NEXT_PUBLIC_APP_URL}/review-form`,
+    images: [
+      {
+        url: `${process.env.NEXT_PUBLIC_APP_URL}/images/review-share-image.jpg`,
+        width: 1200,
+        height: 630,
+        alt: 'Share Your AskTouch Review',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Share Your AskTouch Experience',
+    description: 'Your feedback helps us improve. Share your honest review today.',
+    images: [`${process.env.NEXT_PUBLIC_APP_URL}/images/review-share-image.jpg`,],
+  },
+}
 
 const reviewLink = info.reviewLink;
 const ratings = [1, 2, 3, 4, 5];
