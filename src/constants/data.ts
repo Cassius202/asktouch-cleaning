@@ -1,3 +1,4 @@
+
 export const askTouchData = {
   brand: {
     name: "Ask Touch",
@@ -33,5 +34,40 @@ export const askTouchData = {
   }
 };
 
-export default askTouchData;
 
+export const team = [
+  {
+    name: "Mr. Ask Akinnawo",
+    role: "CEO",
+    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&auto=format&fit=crop&q=60", // Professional Nigerian businessman
+  },
+  {
+    name: "Oladapo Adeleke",
+    role: "Fumigation Manager",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=60", // Confident young professional
+    featured: true
+  },
+  {
+    name: "Ayomide Victore",
+    role: "Commercial Cleaning Manager",
+    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&auto=format&fit=crop&q=60", // Professional Black woman
+  },
+  {
+    name: "Tolulope Akinnawo",
+    role: "Residential Care Lead",
+    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=800&auto=format&fit=crop&q=60", // Friendly professional man
+  },
+]; 
+
+export const info = {
+  name: 'Ask Touch Cleaning & Fumigation',
+  companyName: 'Ask Touch',
+  owner: 'Akinnawo Ask',
+  tagline: 'General Cleaning Services',
+  bookingEmail: 'bookings@mail.asktouchcleaning.name.ng',
+  normalEmail: 'asktouch39@gmail.com',
+  contactEmail: 'contact@mail.asktouchcleaning.name.ng',
+  phone: '+2349034027582',
+  calendlyLink: "https://calendly.com/asktouch39/30min",
+  reviewLink: "https://g.page/r/CaAjzQ6x9e7MEBM/review",
+}

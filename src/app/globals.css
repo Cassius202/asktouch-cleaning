@@ -10,11 +10,12 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --color-dark: var(--color-emerald-700);
+  --color-dark: var(--color-emerald-900);
   --color-primary: var(--color-green-500);
   --color-secondary: #22c55e;
   --color-highlvight: #facc15;
   --color-primary-blue: #1e3a8a;
+  --color-border: var(--color-green-500);
 }
 
 body {
@@ -74,4 +75,35 @@ body {
   100% {
     transform: translateX(-50%);
   }
+}
+
+/* 1. Standard Scrollbar Properties (Firefox) */
+html {
+  scrollbar-width: thin; /* Options: auto, thin, none */
+  /* scrollbar-color: [thumb-color] [track-color] */
+  scrollbar-color: #888 transparent; /* Example: Gray thumb, transparent track */
+}
+
+/* 2. WebKit Scrollbar Properties (Chrome, Safari, Edge) */
+/* Width/Height of the whole scrollbar */
+::-webkit-scrollbar {
+  width: 6px; /* Thin vertical scrollbar */
+  height: 6px; /* Thin horizontal scrollbar */
+}
+
+/* Track/Background color */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* The draggable thumb */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3); /* Transparent black */
+  border-radius: 10px; /* Rounded corners */
+  border: 1px solid transparent; /* Padding around thumb */
+}
+
+/* Hover effect for the thumb */
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.5); /* Darker on hover */
 }

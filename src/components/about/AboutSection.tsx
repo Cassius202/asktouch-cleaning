@@ -14,14 +14,14 @@ const AboutSection = () => {
   ];
 
   return (
-    <section className="py-15 bg-emerald-50/50 overflow-hidden">
+    <section className="py-15 bg-emerald-50 overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           
           {/* Content Column */}
           <div className="space-y-8 order-2 lg:order-1">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white border border-gray-200 rounded-full shadow-sm">
-              <Users className="w-4 h-4 text-emerald-600" />
+              <Users className="w-4 h-4 text-sky-600" />
               <span className="text-gray-600 text-xs font-bold uppercase tracking-wider">
                 About Ask Touch
               </span>
@@ -32,14 +32,14 @@ const AboutSection = () => {
                 Bringing Freshness, Comfort, and Care to Every Space
               </h2>
               <p className="text-gray-600 text-lg leading-relaxed max-w-xl">
-                At <span className="font-bold text-emerald-600">Ask Touch</span>, we go beyond surface cleaning—we bring life back to your home and office. From the heart of Ibadan to the streets of Lagos, our dedicated team combines expert care, eco-friendly solutions, and industry-leading fumigation techniques to ensure every space feels fresh and pest-free.
+                At <span className="font-bold text-sky-600">Ask Touch</span>, we go beyond surface cleaning—we bring life back to your home and office. From the heart of Ibadan to the streets of Lagos, our dedicated team combines expert care, eco-friendly solutions, and industry-leading fumigation techniques to ensure every space feels fresh and pest-free.
               </p>
             </div>
 
             <ul className="grid sm:grid-cols-2 gap-4">
               {highlights.map((item, index) => (
                 <li key={index} className="flex items-center gap-3">
-                  <CheckCircle2 className="w-6 h-6 text-emerald-500 shrink-0" />
+                  <CheckCircle2 className="w-6 h-6 text-sky-500 shrink-0" />
                   <span className="text-gray-700 font-medium">{item}</span>
                 </li>
               ))}
@@ -47,7 +47,7 @@ const AboutSection = () => {
 
             <Link 
               href="/about"
-              className="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-10 py-4 rounded-2xl transition-all shadow-lg shadow-emerald-600/20 active:scale-[0.98]"
+              className="inline-block bg-sky-600 hover:bg-sky-700 text-white font-bold px-10 py-4 rounded-2xl transition-all shadow-lg shadow-sky-600/20 active:scale-[0.98]"
             >
               Learn More
             </Link>
@@ -66,7 +66,7 @@ const AboutSection = () => {
             </div>
             
             {/* Subtle decorative element behind image */}
-            <div className="absolute -z-10 -top-6 -right-6 w-64 h-64 bg-emerald-100 rounded-full blur-3xl opacity-60" />
+            <div className="absolute -z-10 -top-6 -right-6 w-64 h-64 bg-sky-100 rounded-full blur-3xl opacity-60" />
           </div>
 
         </div>

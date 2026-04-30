@@ -1,49 +1,33 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { assets } from '@/constants/assets'
-import { Home, Briefcase, Info, Mail, Menu, X, ChevronDown } from 'lucide-react'
+import { Mail, Menu, X, ChevronDown } from 'lucide-react'
 import Link from 'next/link'
 import { MobileNavigation } from './MobileMenu'
 import Image from 'next/image'
-
-export const navLinks = [
-  { label: 'Home', href: '/', icon: Home },
-  {
-    label: 'Services',
-    href: '/services',
-    icon: Briefcase,
-    dropDown: [
-      { label: 'Residential & Office Cleaning', href: '/services/residential-and-office-cleaning' },
-      { label: 'Pest Control & Fumigation', href: '/services/pest-control-and-fumigation' },
-      { label: 'Healthy & Pest-Free Spaces', href: '/services/healthy-and-pest-free-spaces' }
-    ]
-  },
-  {
-    label: 'About',
-    href: '/about',
-    icon: Info
-  }
-]
-
+import { useRouter, usePathname } from 'next/navigation'
+import { navLinks } from '@/constants/consts'
+import { BackButton } from './BackButton'
 const Header = () => {
+
   const [isScrolled, setIsScrolled] = useState(false)
   const [lastScrollY, setLastScrollY] = useState(0)
   const [shouldShow, setShouldShow] = useState(true)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const isHomePage = pathname === '/'
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
 
-      // Headroom effect
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setShouldShow(false) // Scrolling down
+        setShouldShow(false)
       } else {
-        setShouldShow(true) // Scrolling up
+        setShouldShow(true)
       }
 
-      // Blur/background effect
       setIsScrolled(currentScrollY > 20)
       setLastScrollY(currentScrollY)
     }
@@ -51,6 +35,8 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [lastScrollY])
+
+  if (pathname === '/book') return <BackButton />
 
   return (
     <header
@@ -61,26 +47,30 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-2 md:py-3">
         <div
           className={`flex items-center justify-between gap-4 px-3 md:px-5 py-2 md:py-2.5 rounded-xl md:rounded-2xl border transition-all duration-300 ${
-            isScrolled
-              ? 'bg-zinc-900/80 backdrop-blur-xl border-white/10 shadow-2xl shadow-black/20'
-              : 'bg-zinc-900/40 backdrop-blur-md border-white/5'
+            isScrolled || !isHomePage
+              ? 'bg-white/90 backdrop-blur-xl border-gray-200 shadow-lg'
+              : 'bg-white/30 backdrop-blur-md border-white/20'
           }`}
         >
           {/* Logo */}
           <Link href="/" className="shrink-0">
-            <Image unoptimized src={assets.logoGrayscale} alt="logo" width={32} height={32} className="invert h-7 md:h-8 w-auto" />
+            <Image unoptimized src={assets.logoGrayscale} alt="logo" width={32} height={32} className={`h-7 md:h-8 w-auto ${isHomePage && !isScrolled ? 'brightness-0 invert' : ''}`} />
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:block flex-1">
-            <Navigation />
+            <Navigation isHomePage={isHomePage} isScrolled={isScrolled} />
           </nav>
 
           {/* Contact Button - Desktop */}
           <div className="hidden md:block">
             <Link
               href="/contact"
-              className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-4 py-2 rounded-lg transition-all shadow-lg shadow-emerald-500/20 active:scale-95 text-sm"
+              className={`flex items-center gap-2 font-semibold px-4 py-2 rounded-lg transition-all shadow-lg active:scale-95 text-sm ${
+                isHomePage && !isScrolled
+                  ? 'bg-emerald-500 hover:bg-emerald-600 text-white shadow-emerald-500/20'
+                  : 'bg-emerald-600 hover:bg-emerald-700 text-white'
+              }`}
             >
               <Mail className="w-3.5 h-3.5" />
               <span>Contact Us</span>
@@ -90,7 +80,9 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-1.5 text-white hover:bg-white/10 rounded-lg transition-colors"
+            className={`md:hidden p-1.5 rounded-lg transition-colors ${
+              isHomePage && !isScrolled ? 'text-white hover:bg-white/10' : 'text-gray-700 hover:bg-gray-100'
+            }`}
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -99,7 +91,7 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-2 p-4 rounded-2xl bg-zinc-900/95 backdrop-blur-xl border border-white/10 shadow-2xl">
+          <div className="md:hidden mt-2 p-4 rounded-2xl bg-white/95 backdrop-blur-xl border border-gray-200 shadow-2xl">
             <MobileNavigation onClose={() => setIsMobileMenuOpen(false)} />
           </div>
         )}
@@ -108,34 +100,63 @@ const Header = () => {
   )
 }
 
-const Navigation = () => {
+const Navigation = ({ isHomePage, isScrolled }: { isHomePage: boolean; isScrolled: boolean }) => {
+  const router = useRouter()
+  const pathname = usePathname()
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setOpenDropdown(null)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  // Text color based on background
+  const textColor = isHomePage && !isScrolled ? 'text-white/80 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+  const dropdownBg = isHomePage && !isScrolled ? 'bg-zinc-900/95 backdrop-blur-xl border-white/10' : 'bg-white/95 backdrop-blur-xl border-gray-200'
+  const dropdownText = isHomePage && !isScrolled ? 'text-gray-300 hover:text-white hover:bg-white/10' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+
+  const toggleDropdown = (label: string) => {
+    setOpenDropdown(openDropdown === label ? null : label)
+  }
+
+  const handleItemClick = (href: string) => {
+    router.push(href)
+    setOpenDropdown(null)
+  }
 
   return (
     <menu className="flex items-center justify-center gap-1">
       {navLinks.map((link) => (
-        <li key={link.label} className="relative list-none">
+        <li key={link.label} className="relative list-none" ref={link.dropDown ? dropdownRef : null}>
           {link.dropDown ? (
-            <div
-              onMouseEnter={() => setOpenDropdown(link.label)}
-              onMouseLeave={() => setOpenDropdown(null)}
-              className="relative"
-            >
-              <button className="flex items-center gap-1 text-gray-300 hover:text-white px-3 py-1.5 rounded-lg hover:bg-white/5 transition-all font-medium text-sm">
+            <div className="relative">
+              <button
+                onClick={() => toggleDropdown(link.label)}
+                className={`flex items-center gap-1 px-3 py-1.5 rounded-lg transition-all font-medium text-sm ${textColor} ${
+                  openDropdown === link.label ? 'bg-white/10' : 'hover:bg-white/5'
+                }`}
+              >
                 {link.label}
-                <ChevronDown className="w-3.5 h-3.5" />
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${openDropdown === link.label ? 'rotate-180' : ''}`} />
               </button>
 
               {openDropdown === link.label && (
-                <div className="absolute top-full left-0 mt-2 w-64 py-2 rounded-xl bg-zinc-900/95 backdrop-blur-xl border border-white/10 shadow-2xl">
+                <div className={`absolute top-full left-0 mt-2 w-64 py-2 rounded-xl border shadow-2xl ${dropdownBg}`}>
                   {link.dropDown.map((item) => (
-                    <Link
+                    <button
                       key={item.href}
-                      href={item.href}
-                      className="block px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors"
+                      onClick={() => handleItemClick(item.href)}
+                      className={`block w-full text-left px-4 py-2.5 text-sm transition-colors ${dropdownText}`}
                     >
                       {item.label}
-                    </Link>
+                    </button>
                   ))}
                 </div>
               )}
@@ -143,7 +164,7 @@ const Navigation = () => {
           ) : (
             <Link
               href={link.href}
-              className="flex items-center gap-2 text-gray-300 hover:text-white px-3 py-1.5 rounded-lg hover:bg-white/5 transition-all font-medium text-sm"
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all font-medium text-sm ${textColor} hover:bg-white/5`}
             >
               {link.label}
             </Link>
