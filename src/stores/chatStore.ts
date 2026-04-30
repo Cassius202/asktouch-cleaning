@@ -39,7 +39,7 @@ export const useChatStore = create<ChatStore>()(
             name: null,
             email: null,
             location: null,
-            service: null,
+            service: 'unknown',
             phone: null,
           },
         });
