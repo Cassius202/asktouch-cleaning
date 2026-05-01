@@ -17,7 +17,13 @@ import { usePathname } from "next/navigation";
 const Footer = () => {
   const pathname = usePathname();
 
-  if (pathname === "/book-now" || pathname === "/book") return;
+  if (
+    pathname === "/book-now" ||
+    pathname === "/book" ||
+    pathname.startsWith("/admin")
+  ) {
+    return null;
+  }
   return (
     <div className="px-0">
       <footer className="bg-zinc-900 w-full max-w-screen mx-auto text-white pt-8 lg:pt-12 px-4 sm:px-8 md:px-16 lg:px-28 rounded-tl-3xl rounded-tr-3xl overflow-hidden">
@@ -176,7 +182,9 @@ const Footer = () => {
 
         <div className="flex mt-10 border-t-1 border-zinc-800 pt-5 pb-5 justify-between items-center">
           {/* Dev Agency name */}
-          <span className="text-gray-400 text-sm">Made by Cassius Solutions</span>
+          <span className="text-gray-400 text-sm">
+            Made by Cassius Solutions
+          </span>
 
           {/* Ghost button - Login as admin */}
           <Link

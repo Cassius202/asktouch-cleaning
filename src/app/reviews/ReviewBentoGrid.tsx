@@ -1,11 +1,12 @@
 'use client';
 
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { useState, useEffect, useRef } from "react";
-import { Play, Star, } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Star } from "lucide-react";
 import { MotionDiv } from "@/motion/MotionDiv";
 import Image from "next/image";
-import { assets, reviews, testimonialSampleVideo } from "@/constants/assets"; import { Review } from "@/constants/types";
+import { assets, reviews } from "@/constants/assets";
+import { Review } from "@/constants/types";
 
 export function ReviewBentoGrid() {
   const [mounted, setMounted] = useState(false);
@@ -23,11 +24,7 @@ export function ReviewBentoGrid() {
       {isMobile ? (
         <div className="flex flex-col gap-4">
           <div className="aspect-video">
-            <VideoReviewCard 
-              name="Sarah Johnson" 
-              title="Homeowner" 
-              video={testimonialSampleVideo} 
-            />
+            <ImageReviewCard />
           </div>
           {reviews.slice(0, 6).map((review, i) => (
             <ReviewCard key={i} review={review} />
@@ -40,13 +37,9 @@ export function ReviewBentoGrid() {
             <ReviewCard review={reviews[0]} />
           </div>
 
-          {/* Card 2: Top Middle - Video (3 rows) */}
+          {/* Card 2: Top Middle - Image (3 rows) */}
           <div className="row-span-3">
-            <VideoReviewCard 
-              name="Sarah Johnson" 
-              title="Homeowner" 
-              video={testimonialSampleVideo} 
-            />
+            <ImageReviewCard />
           </div>
 
           {/* Card 3: Top Right - Text (2 rows) */}
@@ -101,55 +94,15 @@ const ReviewCard = ({ review }: { review: Review }) => (
   </MotionDiv>
 );
 
-const VideoReviewCard = ({ name, title, video }: { name: string, title: string, video: string }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [imageError, setImageError] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  const handlePlay = () => {
-    setIsPlaying(true);
-    videoRef.current?.play();
-  };
-  
-  const testimonialThumbnail = assets.testimonialThumbnail;
-  
+const ImageReviewCard = () => {
   return (
-    <div className="relative h-full w-full rounded-3xl overflow-hidden group cursor-pointer">
-      {!isPlaying ? (
-        <>
-          <Image 
-            src={imageError ? testimonialThumbnail : video}
-            alt={name}
-            fill
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            onError={() => setImageError(true)}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-          
-          <div className="absolute inset-0 flex items-center justify-center">
-            <button 
-              onClick={handlePlay}
-              className="w-16 h-16 bg-white/25 backdrop-blur-sm rounded-full flex items-center justify-center text-white border border-white/40 hover:scale-110 hover:bg-white/30 transition-all duration-300"
-            >
-              <Play fill="currentColor" className="ml-1 w-7 h-7" />
-            </button>
-          </div>
-
-          <div className="absolute bottom-6 left-6 text-white">
-            <h4 className="font-semibold text-xl mb-1">{name}</h4>
-            <p className="text-white/90 text-sm">{title}</p>
-          </div>
-        </>
-      ) : (
-        <video
-          ref={videoRef}
-          src={video}
-          controls
-          autoPlay
-          className="absolute inset-0 w-full h-full object-cover"
-          poster={imageError ? testimonialThumbnail : video}
-        />
-      )}
+    <div className="relative h-full w-full rounded-3xl overflow-hidden group">
+      <Image 
+        src="https://nsqgfrsugkvsftnffeno.supabase.co/storage/v1/object/public/images/man-fumigating-image.jpg"
+        alt="Testimonial"
+        fill
+        className="absolute inset-0 w-full h-full object-cover object-right transition-transform duration-700 group-hover:scale-105"
+      />
     </div>
   );
 };

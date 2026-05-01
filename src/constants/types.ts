@@ -43,3 +43,12 @@ export interface ChatLeadsData {
 export interface NewsletterData {
     email: string;
 }
+
+export interface ClientFormData {
+    name: string;
+    email: string;
+    phone: string;
+    location: string;
+    service: string;
+    note: string | null;
+};

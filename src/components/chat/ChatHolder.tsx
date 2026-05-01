@@ -216,7 +216,7 @@ const handleSend = async () => {
 
   const isBookingPage = pathname === '/book-now' || pathname === '/book'
 
-  if (isBookingPage) return null
+  if (isBookingPage || pathname === '/admin') return null
 
   return (
     <div className="fixed bottom-6 right-6 max-sm:right-4 z-[200] flex flex-col items-end">

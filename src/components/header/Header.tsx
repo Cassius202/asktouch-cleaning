@@ -36,7 +36,9 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [lastScrollY])
 
-  if (pathname === '/book') return <BackButton />
+  if (pathname.startsWith('/admin/dashboard')) return null;
+
+  if (pathname === '/book' || pathname.startsWith('/admin')) return <BackButton />
 
   return (
     <header

@@ -14,7 +14,7 @@ import {askTouchData} from "@/constants/data";
 import { cleaningServiceData } from "@/constants/info";
 
 const ownerImage =
-  "https://i.pinimg.com/736x/82/df/d2/82dfd26b7a4fcb713c87c4958b8b8d48.jpg";
+  "https://nsqgfrsugkvsftnffeno.supabase.co/storage/v1/object/public/images/owner-image-crop.jpg";
 
 export default function AboutPage() {
   return (
@@ -165,9 +165,7 @@ export default function AboutPage() {
 
       {/* CTA Section */}
       <section className="py-20 px-4 bg-linear-to-br from-emerald-600 to-emerald-700 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNiIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMSkiIHN0cm9rZS13aWR0aD0iMiIvPjwvZz48L3N2Zz4=')] opacity-20" />
-
-        <div className="max-w-4xl mx-auto text-center relative z-10">
+           <div className="max-w-4xl mx-auto text-center relative z-10">
           <FadeInView>
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
               {askTouchData.cta}

@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
         permanent: true, // 301 redirect - good for SEO
       },
       {
+        source: '/admin/dashboard/home',
+        destination: '/admin/dashboard',
+        permanent: true, // 301 redirect - good for SEO
+      },
+      {
         source: '/booknow',
         destination: '/book',
         permanent: true,

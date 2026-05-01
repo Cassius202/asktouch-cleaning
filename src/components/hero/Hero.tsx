@@ -1,7 +1,6 @@
 import Link from "next/link";
-import ContactForm from "./ContactForm";
 import HeroBackground from "./HeroBackground";
-import { MessageCircle, Calendar, Phone, CheckCircle2 } from "lucide-react";
+import { Calendar, Phone, CheckCircle2 } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -80,7 +79,7 @@ const Hero = () => {
                     <h4 className="text-white font-bold text-base leading-tight">
                       {item.title}
                     </h4>
-                    <p className="text-zinc-500 text-xs mt-1">{item.desc}</p>
+                    <p className="text-zinc-400 text-xs mt-1">{item.desc}</p>
                   </div>
                 </div>
               ))}

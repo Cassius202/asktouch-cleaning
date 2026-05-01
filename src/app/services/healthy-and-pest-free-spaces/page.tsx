@@ -9,9 +9,9 @@ export default function HealthySpacesPage() {
     <div className="min-h-svh w-screen bg-emerald-800">
       <GridTexture size={3} />
       
-      <div className="global-padding py-24 bg-white min-h-screen rounded-t-[3rem] md:rounded-t-[5rem]">
+      <div className="global-padding py-24 bg-white min-h-screen rounded-t-[3rem] md:rounded-t-[5rem] overflow-x-hidden">
         {/* Header Section */}
-        <div className="max-w-4xl">
+        <div className="max-w-4xl mx-auto">
           <Title text="Healthy & Pest-Free Spaces" mode="light" />
           <SubTitle
             text="We provide routine Care for your home and office, ensuring every corner is sanitized and protected."
