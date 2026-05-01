@@ -66,7 +66,7 @@ export const info = {
   tagline: 'General Cleaning Services',
   bookingEmail: 'bookings@mail.asktouchcleaning.name.ng',
   normalEmail: 'asktouch39@gmail.com',
-  contactEmail: 'contact@mail.asktouchcleaning.name.ng',
+  contactEmail: 'hello@mail.asktouchcleaning.name.ng',
   phone: '+2349034027582',
   calendlyLink: "https://calendly.com/asktouch39/30min",
   reviewLink: "https://g.page/r/CaAjzQ6x9e7MEBM/review",

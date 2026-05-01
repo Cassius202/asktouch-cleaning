@@ -32,6 +32,19 @@ export const metadata: Metadata = {
     "Office cleaning",
     "Ask Touch",
   ],
+   robots: {
+    index: true,     // Allow search engines to index the page
+    follow: true,    // Allow search engines to follow links on the page
+    nocache: true,   // Don't cache this page
+    googleBot: {
+      index: true,
+      follow: false,
+      noimageindex: true, // Don't index images
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   icons: {
     icon: [
       { url: "/favicons/favicon-32x32.png", sizes: "32x32", type: "image/png" },
