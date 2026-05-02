@@ -112,7 +112,7 @@ export default function WhatsAppForm({ formData, setFormData }: FormProps) {
   };
 
   return (
-    <div className="w-full mx-auto max-w-md p-8 bg-white rounded-3xl shadow-xl shadow-emerald-900/5">
+    <div className="w-full mx-auto max-w-md p-4 sm:p-8 bg-white rounded-3xl shadow-xl shadow-emerald-900/5">
       <div className="flex gap-2 mb-8">
         <div
           className={`h-1 flex-1 rounded-full transition-all ${step >= 1 ? "bg-emerald-600" : "bg-zinc-200"}`}

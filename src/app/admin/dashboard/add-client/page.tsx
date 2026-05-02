@@ -41,8 +41,9 @@ export default function AddClientPage() {
 
   const validatePhone = (phone: string) => {
     const phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
-    return phoneRegex.test(phone);
-  };
+    const plus234Regex = /^\+234[-\s\.]?[0-9]{10}$/;
+    return (phoneRegex.test(phone) || plus234Regex.test(phone));
+};
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,28 +65,34 @@ export default function AddClientPage() {
 
     setIsSubmitting(true);
     
-    try {
-      const result = await completedClientUpload(formData, requestReview, sendThankYou);
-      if (result.success) {
-        toast.success('Client added successfully!');
-        // Clear form or redirect
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          location: '',
-          service: '',
-          note: ''
-        });
-        setRequestReview(false);
-        setSendThankYou(false);
-      }
-    } catch (error) {
-      console.error('Error adding client:', error);
-      toast.error('Failed to add client. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
+try {
+  const result = await completedClientUpload(formData, requestReview, sendThankYou);
+
+  if (result.success) {
+    toast.success('Client added successfully!')
+    setFormData({ name: '', email: '', phone: '', location: '', service: '', note: '' })
+    setRequestReview(false)
+    setSendThankYou(false)
+    return
+  }
+
+  // Partial failures
+  if (result.loggedToSupabase && !result.emailSent) {
+    toast.error('Client saved, but emails failed to send.')
+    return
+  }
+
+  if (!result.loggedToSupabase) {
+    toast.error('Failed to save client. Please try again.')
+  }
+
+} catch (error) {
+  console.error('Unexpected error:', error)
+  toast.error('Something went wrong. Please try again.')
+} finally {
+  setIsSubmitting(false)
+}
+
   };
 
   return (

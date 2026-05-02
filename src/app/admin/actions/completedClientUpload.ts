@@ -26,7 +26,7 @@ export async function completedClientUpload(formData: ClientFormData, requestRev
 
     if (clientError) {
       console.error('Error inserting client:', clientError);
-      return { success: false, error: clientError.message };
+      return { success: false, loggedToSupabase: false, error: clientError.message, emailSent: false };
     }
 
     const url = process.env.GOOGLE_SHEET_URL;
@@ -34,6 +34,7 @@ export async function completedClientUpload(formData: ClientFormData, requestRev
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        action: 'create',
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
@@ -47,7 +48,7 @@ export async function completedClientUpload(formData: ClientFormData, requestRev
     const sheetResult = await sheetResponse.json();
     if (!sheetResponse.ok) {
       console.error('Client Spreadsheet error: ', sheetResult.message);
-      return { success: false, error: 'Spreadsheet error' };
+      return { success: false, emailSent: false, loggedToSupabase: true, error: 'Spreadsheet error' };
     }
 
     // 2. Handle review request if needed
@@ -56,14 +57,16 @@ export async function completedClientUpload(formData: ClientFormData, requestRev
 
       if (!emailResult.success) {
         console.error('Email sending error:', emailResult.message);
-        return { success: false, error: emailResult.message };
+        return { loggedToSupabase: true, success: false, error: emailResult.message, emailSent: false };
       }
     }
 
     return {
       success: true,
       data: clientData,
-      message: 'Client data added successfully'
+      loggedToSupabase: true,
+      message: 'Client data added successfully',
+      emailSent: true
     };
 
   } catch (error) {

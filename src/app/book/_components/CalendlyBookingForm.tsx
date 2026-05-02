@@ -129,7 +129,7 @@ const handleSubmit = async (e: React.FormEvent) => {
 };
 
   return (
-    <div className="w-full mx-auto max-w-md xl:max-w-lg p-8 bg-white rounded-3xl shadow-xl shadow-emerald-900/5 border border-emerald-50">
+    <div className="w-full mx-auto max-w-md xl:max-w-lg p-4 sm:p-8 bg-white rounded-3xl shadow-xl shadow-emerald-900/5 border border-emerald-50">
       <div className="mb-8 text-center">
         <div className="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-4 max-md:hidden">
           <Calendar className="w-6 h-6 text-emerald-600" />

@@ -8,7 +8,7 @@ const trustPoints = [
     icon: Shield,
     title: 'Licensed & Insured',
     description: 'Fully certified with comprehensive insurance coverage for your peace of mind',
-    image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&auto=format&fit=crop'
+    image: 'https://nsqgfrsugkvsftnffeno.supabase.co/storage/v1/object/public/images/window.png'
   },
   {
     icon: Award,
@@ -20,7 +20,7 @@ const trustPoints = [
     icon: Leaf,
     title: 'Eco-Friendly Products',
     description: 'Safe, non-toxic cleaning solutions that protect your family and the environment',
-    image: 'https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=800&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1740657254989-42fe9c3b8cce?w=800&auto=format&fit=crop&q=100&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2xlYW5pbmd8ZW58MHx8MHx8fDA%3D'
   },
   {
     icon: Clock,
@@ -32,7 +32,7 @@ const trustPoints = [
     icon: Users,
     title: 'Trained Professionals',
     description: 'Expert team with extensive training in modern cleaning and pest control techniques',
-    image: 'https://images.unsplash.com/photo-1581578949510-fa7315c4c350?w=800&auto=format&fit=crop'
+    image: 'https://nsqgfrsugkvsftnffeno.supabase.co/storage/v1/object/public/images/fumigation.jpg'
   },
   {
     icon: Sparkles,

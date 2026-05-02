@@ -3,6 +3,14 @@ import { redirect } from "next/navigation";
 import { NavLink } from "./_components/NavLink";
 import { LogoutBtn } from "./_components/LogoutBtn";
 import { MobileMenu } from "./_components/MobileMenu";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  }
+}
 
 export default async function AdminLayout({
   children,
@@ -30,8 +38,8 @@ export default async function AdminLayout({
             <NavLink href="/admin/dashboard/completed-clients">
               Completed clients
             </NavLink>
-            <NavLink href="/admin/dashboard/review-requests">
-              Review requests
+            <NavLink href="/admin/dashboard/professional-mail">
+              Professional Mail
             </NavLink>
             <NavLink href="/admin/dashboard/add-client">
               Add Completed Client
