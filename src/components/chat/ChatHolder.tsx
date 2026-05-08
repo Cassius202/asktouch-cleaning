@@ -216,7 +216,7 @@ const handleSend = async () => {
 
   const isBookingPage = pathname === '/book-now' || pathname === '/book'
 
-  if (isBookingPage || pathname.startsWith("/admin") || pathname === '/admin' || pathname.startsWith('/blog')) return null
+  if (isBookingPage || pathname.startsWith("/admin") || pathname === '/admin') return null
 
   return (
     <div className="fixed bottom-6 right-6 max-sm:right-4 z-[200] flex flex-col items-end">
@@ -226,7 +226,7 @@ const handleSend = async () => {
             initial={{ opacity: 0, scale: 0.95, y: 12 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 12 }}
-            className="mb-4 w-[calc(100vw-32px)] sm:w-[380px] h-[580px] bg-white border border-zinc-200 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+            className="mb-4 w-[calc(100vw-32px)] sm:w-[380px] h-[400px] bg-white border border-zinc-200 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
           >
             {/* Header - Emerald Green */}
             <div className="bg-emerald-600 px-4 py-3 flex items-center justify-between shrink-0 shadow-md">

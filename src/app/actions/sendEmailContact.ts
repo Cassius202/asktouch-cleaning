@@ -5,12 +5,13 @@ import { Resend } from "resend";
 import { ThankYouEmail } from '@/templates/Thankyou';
 import { resendRecepients } from "@/constants/assets";
 import { AdminEmail } from "@/templates/AdminEmail";
+import { info } from "@/constants/data";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 export async function sendEmailContact(data: EmailData) {
 
    const { data: adminEmailResponse, error: adminError } = await resend.emails.send({
-    from: 'Ask Touch <onboarding@resend.dev>',
+    from: `Ask Touch <${info.contactEmail}>`,
     to: resendRecepients,
     subject: 'New Booking Request from ' + data.name,
     react: AdminEmail({ data }),
@@ -26,7 +27,7 @@ export async function sendEmailContact(data: EmailData) {
 
 
   const { data: clientEmailResponse, error: clientError } = await resend.emails.send({
-    from: 'Ask Touch <onboarding@resend.dev>',
+    from: `Ask Touch <${info.contactEmail}>`,
     to: data.email.trim(),
     subject: `New Booking Request from ${data.name}`,
     react: ThankYouEmail({ data }), 
@@ -41,4 +42,4 @@ export async function sendEmailContact(data: EmailData) {
     clientMessageSent: clientError ? false : true,
     message: "Thank you, Your message has been received." 
   };
-} 
+}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { GoogleTagManager } from '@next/third-parties/google'
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import ClientLoader from "@/loader/ClientLoader";
@@ -7,6 +8,8 @@ import Header from "../components/header/Header";
 import Footer from "@/components/footer/Footer";
 import ChatHolder from "@/components/chat/ChatHolder";
 import {Tracker} from "@/components/tracker/Tracker";
+
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -96,6 +99,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <GoogleTagManager gtmId="GTM-5PHB2J2K" />
       <body className="min-h-full flex flex-col">
         <Tracker />
         <Toaster reverseOrder={false} position="top-center" />

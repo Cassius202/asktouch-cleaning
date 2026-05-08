@@ -1,5 +1,6 @@
 'use server'
 import { ChatLeadsData } from "@/constants/types"
+import { sendAdminNotification } from "./sendAdminNotification";
 
 export async function LogChatLeads(data: ChatLeadsData) {
   try {
@@ -13,7 +14,15 @@ export async function LogChatLeads(data: ChatLeadsData) {
     const text = await response.text(); // Get raw text first
     try {
       const result = JSON.parse(text);
-      return { success: true, rowId: result.rowId };
+
+      const notificationResult = await sendAdminNotification({...data, rowId: result.rowId});
+
+      if (!notificationResult.success) {
+        console.error("Failed to send admin notification:", notificationResult.error);
+        return { success: false, message: "Failed to notify admin about the interested lead" };
+      }
+
+      return { success: true, rowId: result.rowId, adminMessageSent: result.adminMessageSent };
     } catch (e) {
       console.error("Google returned HTML instead of JSON. Check script permissions. Response:", text.slice(0, 200));
       return { success: false, message: "Invalid response from Google" };
