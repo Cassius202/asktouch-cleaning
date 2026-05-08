@@ -1,16 +1,22 @@
 // app/admin/dashboard/blogs/edit/[id]/page.tsx
-import { fetchBlogById } from "@/app/actions/fetchBlogs";
+import { getBlogById } from "@/lib/blog-service"; // Use the service, not the action
 import { notFound } from "next/navigation";
 import EditBlogForm from "./EditBlogForm";
 
-export default async function EditPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function EditPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  // 1. Await params (Next.js 15 requirement)
   const { id } = await params;
 
-  const result = await fetchBlogById(id);
-  
-  if (!result.success || id === null || !result.data) {
+  const blog = await getBlogById(id);
+
+  if (!blog) {
     notFound();
   }
-  
-  return <EditBlogForm blog={result.data} blogId={id!} />;
+
+  // 4. Render the form with the blog data
+  return <EditBlogForm blog={blog} blogId={id} />;
 }

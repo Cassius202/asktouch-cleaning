@@ -17,7 +17,7 @@ export const assets = {
 };
 
 export const resendRecepients: string[] = [
-  'cassiusejekwu@gmail.com', 'askakinnawo@gmail.com'
+  'asktouch39@gmail.com',
 ]
 
 export const testimonialSampleVideo = 'https://nsqgfrsugkvsftnffeno.supabase.co/storage/v1/object/public/videos/testimonial-sample.mp4';

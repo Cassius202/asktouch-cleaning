@@ -44,6 +44,7 @@ async function BlogContent() {
       // If data is empty and there's no more, we could pass an error string 
       // or just keep it undefined as the service handles errors gracefully.
       initialError={undefined} 
+      initialCursor={result.nextCursor as string | null}
     />
   );
 }

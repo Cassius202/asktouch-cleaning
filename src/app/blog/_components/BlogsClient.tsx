@@ -7,11 +7,14 @@ import { Blog } from "@/constants/types";
 import { assets } from '@/constants/assets';
 import Link from 'next/link';
 import Image from 'next/image';
+import { getBlogs } from '@/lib/blog-service';
+import { fetchBlogsAction } from '@/app/actions/blogActions';
 
 interface BlogsClientProps {
   initialBlogs: Blog[];
   initialHasMore: boolean;
   initialError?: string;
+  initialCursor: string | null;
 }
 
 const AUTHOR = {
@@ -94,9 +97,10 @@ function BlogCard({ blog }: { blog: Blog }) {
 export default function BlogsClient({
   initialBlogs,
   initialHasMore,
-  initialError
+  initialError, initialCursor
 }: BlogsClientProps) {
   const [blogs, setBlogs] = useState<Blog[]>(initialBlogs);
+  const [cursor, setCursor] = useState<string | null>(initialCursor);
   const [hasMore, setHasMore] = useState(initialHasMore);
   const [loadingMore, setLoadingMore] = useState(false);
 
@@ -104,25 +108,33 @@ export default function BlogsClient({
     if (initialError) toast.error(initialError);
   }, [initialError]);
 
-  const loadMoreBlogs = useCallback(async () => {
-    if (loadingMore || !hasMore) return;
-    setLoadingMore(true);
-    try {
-      const lastBlog = blogs[blogs.length - 1];
-      const result = await fetchBlogs(lastBlog?.created_at);
-      if (result.success && result.data) {
-        setBlogs(prev => [...prev, ...result.data]);
-        setHasMore(result.hasMore || false);
-      } else {
-        toast.error(result.error || 'Failed to load more blogs');
-      }
-    } catch (error) {
-      toast.error('Failed to load more blogs');
-      console.error(error);
-    } finally {
-      setLoadingMore(false);
+ const loadMoreBlogs = useCallback(async () => {
+  // 1. Prevent overlapping fetches or fetching if no more data/cursor exists
+  if (loadingMore || !hasMore || !cursor) return;
+
+  setLoadingMore(true);
+
+  try {
+    // 2. Call the Server Action with the current cursor
+    const result = await fetchBlogsAction(cursor);
+
+    if (result.success && result.data) {
+      // 3. Append new blogs to the list
+      setBlogs(prev => [...prev, ...result.data!]);
+      
+      // 4. Update the cursor and hasMore status from the server response
+      setCursor(result.nextCursor);
+      setHasMore(result.hasMore || false);
+    } else {
+      toast.error(result.error || 'Failed to load more blogs');
     }
-  }, [blogs, hasMore, loadingMore]);
+  } catch (error) {
+    console.error('Pagination Error:', error);
+    toast.error('An unexpected error occurred while loading more blogs');
+  } finally {
+    setLoadingMore(false);
+  }
+}, [cursor, hasMore, loadingMore]); // Dependency on cursor is key here
 
   const featuredBlog = blogs[0];
   const restBlogs = blogs.slice(1);
