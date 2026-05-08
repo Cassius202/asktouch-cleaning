@@ -16,7 +16,7 @@ function getInitials(name: string) {
     .join("")
     .slice(0, 2)
     .toUpperCase();
-}
+};
 
 export default function ClientsTable({
   clients,

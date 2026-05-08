@@ -28,3 +28,4 @@ export default function useSessionStorage<T>(key: string, initialValue: T) {
 
   return [value, setValue] as const;
 }
+

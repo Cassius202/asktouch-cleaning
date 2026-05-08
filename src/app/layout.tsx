@@ -6,6 +6,7 @@ import ClientLoader from "@/loader/ClientLoader";
 import Header from "../components/header/Header";
 import Footer from "@/components/footer/Footer";
 import ChatHolder from "@/components/chat/ChatHolder";
+import {Tracker} from "@/components/tracker/Tracker";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,6 +21,7 @@ const geistMono = Geist_Mono({
 const metaImage = "../../public/ask-touch-metaimage.jpg";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://asktouch-cleaning.name.ng/'),
   title:
     "Ask Touch | Professional Cleaning & Fumigation in Ibadan, Lagos and Nationwide",
   description:
@@ -90,10 +92,12 @@ export default function RootLayout({
 }>) {
   return (
     <html
+      data-scroll-behavior="smooth"
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <Tracker />
         <Toaster reverseOrder={false} position="top-center" />
         <Header />
         <ClientLoader>

@@ -7,7 +7,7 @@ export const DirectionButton = () => {
     <button
       onClick={() =>
         window.open(
-          "https://www.google.com/maps/dir/?api=1&destination=7.435849999999998,3.888326699999994",
+          "https://www.google.com/maps/dir/?api=1&destination=7.3878253,3.834758",
           "_blank",
         )
       }

@@ -28,9 +28,10 @@ export default function DeepCleaningPage() {
           <div className="md:col-span-7 group">
             <div className="relative h-[350px] rounded-3xl overflow-hidden mb-6">
               <Image
-                src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?q=80&w=1974&auto=format&fit=crop"
+                src="https://nsqgfrsugkvsftnffeno.supabase.co/storage/v1/object/public/images/clean1.jpg"
                 alt="Residential Deep Cleaning"
                 fill
+                loading="eager"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />

@@ -13,6 +13,7 @@ import {
   FaPhone,
 } from "react-icons/fa";
 import { usePathname } from "next/navigation";
+import { navLinks } from "@/constants/consts";
 
 const Footer = () => {
   const pathname = usePathname();
@@ -20,6 +21,7 @@ const Footer = () => {
   if (
     pathname === "/book-now" ||
     pathname === "/book" ||
+    pathname.startsWith("/blog") ||
     pathname.startsWith("/admin")
   ) {
     return null;
@@ -89,7 +91,7 @@ const Footer = () => {
           {/* Links Section */}
           <div className="lg:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 lg:gap-16 items-start">
             {/* Quick Links */}
-            {/* <div>
+            <div>
               <h3 className="font-semibold text-sm mb-4 text-white">Quick Links</h3>
               <ul className="space-y-3 text-sm text-gray-300">
                 {navLinks.map((link) => (
@@ -100,7 +102,7 @@ const Footer = () => {
                   </li>
                 ))}
               </ul>
-            </div> */}
+            </div>
 
             {/* Services */}
             <div>
@@ -181,12 +183,22 @@ const Footer = () => {
         </div>
 
         <div className="flex mt-10 border-t-1 border-zinc-800 pt-5 pb-5 justify-between items-center">
-          {/* Dev Agency name */}
           <span className="text-gray-400 text-sm">
             Made by Cassius Solutions
           </span>
 
-          {/* Ghost button - Login as admin */}
+          {/* Vecteezy attribution */}
+          <div className="select-none pointer-events-none user-select-none">
+             <a
+            href="https://www.vecteezy.com/free-videos/hero"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-500 text-xs hover:text-gray-400 transition-colors"
+          >
+            Hero video by Vecteezy
+          </a>
+          </div>
+
           <Link
             href="/admin/login"
             className="text-gray-100 bg-emerald-800/60 px-4 rounded-md py-2 hover:text-gray-300 text-xs transition-colors duration-200 opacity-60 hover:opacity-100"

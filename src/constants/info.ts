@@ -57,7 +57,7 @@ export const cleaningServiceData = {
   slogan: "Keeping Your Space Clean & Pest-Free!",
 };
 
-export const mapLocation = 'CVPQ+88W, Barth Road, Ibadan 200132, Oyo';
+export const mapLocation = "No 4 Abalamu off Apata Ibadan Oyo state";
 
 export const NIGERIAN_STATES = [
   "Abia", "Anambra", "Akwa Ibom", "Bauchi", "Bayelsa", "Benue", "Cross River",

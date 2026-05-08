@@ -27,5 +27,7 @@ export const metadata: Metadata = {
 }
 
 export default function ReviewFormPage() {
-  return <ReviewFormClient />
+  return <div>
+    <ReviewFormClient />
+  </div>
 }

@@ -10,6 +10,14 @@ export interface ClientType extends ClientFormData {
   id: string;
 }
 
+export interface ClientFull extends ClientFormData {
+  id: string;
+  created_at: string;
+  updated_at: string;
+}
+
+
+
 export async function getClients(index: number) {
   const supabase = await createClient();
   
@@ -33,6 +41,47 @@ export async function getClients(index: number) {
     hasMore: (count ?? 0) > to + 1,
     message: 'Clients fetched successfully'
   }
+}
+export async function getClientDetails(index: number) {
+  const supabase = await createClient();
+  
+  const from = (index - 1) * PAGE_SIZE;
+  const to = from + PAGE_SIZE - 1;
+
+  const { data, error, count } = await supabase
+    .from('clients')
+    .select('*', { count: 'exact' })
+    .order('created_at', { ascending: false })
+    .range(from, to);
+
+  if (error) {
+    return { success: false, hasMore: false, data: [], total: 0, message: 'Error fetching clients' }
+  }
+
+  return {
+    success: true,
+    data: data as ClientFull[],
+    total: count ?? 0,
+    message: 'Clients fetched successfully'
+  }
+}
+
+// Add this to your clientsTableOperations.ts
+export async function getRecentClients(limit: number = 5) {
+  const supabase = await createClient();
+  
+  const { data, error } = await supabase
+    .from('clients')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(limit);
+
+  if (error) {
+    console.error('Error fetching recent clients:', error);
+    return { success: false, data: [], error: error.message };
+  }
+
+  return { success: true, data: data as ClientFull[] };
 }
 
 export async function deleteClient(id: string) {

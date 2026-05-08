@@ -11,7 +11,7 @@ export const Location = () => {
         {/* Map Section - Left side per image */}
         <FadeInView className="w-full aspect-square sm:aspect-video lg:aspect-square relative rounded-3xl overflow-hidden shadow-2xl shadow-emerald-900/10 border border-zinc-100">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.2654675688495!2d3.888326699999994!3d7.435849999999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1039f34b6928bb57%3A0xd2b1b6d67b165398!2sBasketball%20court%2C%20University%20Of%20Ibadan!5e0!3m2!1sen!2sng!4v1777449448017!5m2!1sen!2sng"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.696873732523!2d3.8347579739810276!3d7.387825312518337!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x10398d0051fdc8b7%3A0xa5e205618b1cbb6!2sAbalamu!5e0!3m2!1sen!2sng!4v1777923270132!5m2!1sen!2sng"
             className="absolute inset-0 w-full h-full grayscale-[0.2] contrast-[1.1]"
             style={{ border: 0 }}
             allowFullScreen

@@ -52,3 +52,49 @@ export interface ClientFormData {
     service: string;
     note: string | null;
 };
+
+// types/blog.ts
+export interface Blog {
+    title: string;
+    description: string;
+    image?: string;
+    content: string;
+    date: string;
+    id: string;    
+    slug?: string;
+    created_at: string; 
+    updated_at: string;
+}
+
+export interface CreateBlogDTO {
+    title: string;
+    description: string;
+    image: string | null;
+    content: string;
+    date: string;
+    slug: string | null;
+}
+export interface UpdateBlogDTO extends Partial<CreateBlogDTO> {
+    updated_at?: string; 
+}
+
+export type ClockInEvent =
+  | 'normal-visit'
+  | 'booking'
+  | 'contact-attempt'
+  | 'review-funnel-visit'
+  | 'blog-visit'
+  | 'page_view';
+
+export type DeviceType = 'desktop' | 'mobile' | 'tablet' | 'unknown';
+export interface WebsiteVisit {
+  id: string;
+  event: ClockInEvent;
+  page: string;
+  device_type: DeviceType;
+  visited_at: string;
+  session_id: string;
+}
+
+// for inserts — omit generated fields
+export type CreateWebsiteVisit = Omit<WebsiteVisit, 'id' | 'visited_at' | 'session_id'>;

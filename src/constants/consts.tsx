@@ -1,4 +1,4 @@
-import { Home, Briefcase, Info, Star } from 'lucide-react';
+import { Home, Briefcase, Info, Star, Newspaper } from 'lucide-react';
 
 export const companyLogos = [
   {
@@ -57,6 +57,11 @@ export const navLinks = [
     label: 'Reviews',
     href: '/reviews',
     icon: Star
+  },
+  {
+    label: 'Blog',
+    href: '/blog',
+    icon: Newspaper
   }
 ]
 

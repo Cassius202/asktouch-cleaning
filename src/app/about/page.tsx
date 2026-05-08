@@ -10,7 +10,7 @@ import {
   Clock,
 } from "lucide-react";
 import Link from "next/link";
-import {askTouchData} from "@/constants/data";
+import { askTouchData } from "@/constants/data";
 import { cleaningServiceData } from "@/constants/info";
 
 const ownerImage =
@@ -49,6 +49,7 @@ export default function AboutPage() {
                   src={ownerImage}
                   alt="Ask Touch Owner"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover object-[center_0%]"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent" />
@@ -66,11 +67,14 @@ export default function AboutPage() {
                     {askTouchData.brand.name}
                   </span>
                   , we understand that a clean environment is essential for
-                  health, productivity, and peace of mind. With years of
-                  experience serving homes and businesses across{" "}
-                  {askTouchData.contact.locations.join(" and ")}, we&apos;ve
-                  built our reputation on reliability, professionalism, and
-                  exceptional results.
+                  health, productivity, and peace of mind. Founded by{" "}
+                  <span className="font-semibold text-slate-900">
+                    Mr. Ask Akinnawo
+                  </span>
+                  , our company has been serving homes and businesses across{" "}
+                  {askTouchData.contact.locations.join(" and ")} with years of
+                  experience. We&apos;ve built our reputation on reliability,
+                  professionalism, and exceptional results.
                 </p>
                 <p className="text-lg text-slate-600 leading-relaxed">
                   Our team of trained professionals uses eco-friendly products
@@ -165,7 +169,7 @@ export default function AboutPage() {
 
       {/* CTA Section */}
       <section className="py-20 px-4 bg-linear-to-br from-emerald-600 to-emerald-700 relative overflow-hidden">
-           <div className="max-w-4xl mx-auto text-center relative z-10">
+        <div className="max-w-4xl mx-auto text-center relative z-10">
           <FadeInView>
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
               {askTouchData.cta}

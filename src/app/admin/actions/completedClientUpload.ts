@@ -29,7 +29,7 @@ export async function completedClientUpload(formData: ClientFormData, requestRev
       return { success: false, loggedToSupabase: false, error: clientError.message, emailSent: false };
     }
 
-    const url = process.env.GOOGLE_SHEET_URL;
+    const url = process.env.GOOGLE_SCRIPT_URL;
     const sheetResponse = await fetch(url!, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
