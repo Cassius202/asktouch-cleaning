@@ -1,8 +1,34 @@
+import { Metadata } from 'next';
 import Image from "next/image";
 import Link from "next/link";
 import { SubTitle, Title } from "@/templates/Headings";
 import { GridTexture } from "@/utils/GridTexture";
-import { ArrowRight, ShieldCheck, Sparkles, Bug, Calendar, Star } from "lucide-react";
+import { ArrowRight, ShieldCheck, Sparkles, Bug, Calendar} from "lucide-react";
+
+export const metadata: Metadata = {
+  metadataBase: new URL('http://asktouchcleaning.name.ng'),
+  title: 'Professional Cleaning & Pest Control Services | AskTouch',
+  description: 'Explore our premium services including deep cleaning, office sanitation, and expert pest control. Professional care for homes and businesses in Lagos.',
+  openGraph: {
+    title: 'AskTouch | Deep Cleaning & Pest Management Services',
+    description: 'From residential sanctuaries to corporate hubs, we deliver health, hygiene, and peace of mind through professional care.',
+    url: '/services',
+    images: [
+      {
+        url: '/ask-touch-metaimage.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'AskTouch Professional Services',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Expert Cleaning & Pest Control | AskTouch',
+    description: 'Industrial-grade deep cleaning and EPA-approved pest management services.',
+    images: ['/ask-touch-metaimage.jpg'],
+  },
+};
 
 export default function GeneralServices() {
   return (
@@ -23,7 +49,7 @@ export default function GeneralServices() {
             />
           </div>
 
-          {/* Service Bento Grid inspired by image_f2699b.png */}
+          {/* Service Bento Grid */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 w-full">
             
             {/* Service 1: Deep Cleaning */}
@@ -96,7 +122,6 @@ export default function GeneralServices() {
 
           {/* Buttons Section */}
           <div className="flex flex-col sm:flex-row gap-6 mt-8">
-            {/* Book Now Button */}
             <Link 
               href="/book" 
               className="group px-12 py-4 bg-zinc-950 hover:bg-zinc-900 text-white rounded-full font-bold text-lg transition-all duration-300 hover:shadow-xl hover:scale-105 flex items-center justify-center gap-3"
@@ -106,7 +131,6 @@ export default function GeneralServices() {
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
 
-            {/* See Our Reviews Button */}
             <Link 
               href="/reviews" 
               className="group px-12 py-4 bg-white border-2 border-zinc-600 text-zinc-700 hover:bg-emerald-50 rounded-full font-bold text-lg transition-all duration-300 hover:shadow-xl flex items-center justify-center gap-3"
@@ -139,7 +163,7 @@ function ServiceHero() {
           <Sparkles className="w-4 h-4" />
           AskTouch Solutions
         </div>
-        <h1 className="text-5xl md:text-7xl font-serif italic  text-white tracking-tighter">
+        <h1 className="text-5xl md:text-7xl font-serif italic text-white tracking-tighter">
           Our Professional <span className="text-emerald-400">Services</span>
         </h1>
         <p className="text-gray-200 max-w-xl mx-auto text-lg">

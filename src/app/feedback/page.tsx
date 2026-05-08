@@ -1,10 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Star, Send, User, Mail, MessageCircle, ThumbsUp, ArrowLeft } from 'lucide-react';
+import { Send, User, Mail, MessageCircle, ArrowLeft } from 'lucide-react';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
-import { cn } from "@/utils/cn";
 
 export default function FeedbackPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);

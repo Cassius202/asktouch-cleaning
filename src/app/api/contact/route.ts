@@ -28,7 +28,7 @@ export async function POST(req: Request) {
     //sending leads to my email
     const emailResult = await sendEmailContact(data);
 
-    console.log(emailResult);
+    // console.log(emailResult);
 
     if (!emailResult.success) {
       console.error(emailResult.message);

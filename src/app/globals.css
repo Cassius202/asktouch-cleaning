@@ -195,3 +195,12 @@ html {
 .prose p:empty::after {
   content: "\00a0";
 }
+
+.skeleton {
+  background-color: #e5e7eb;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

@@ -7,6 +7,12 @@ import toast from "react-hot-toast";
 import useSessionStorage from "@/hooks/useSessionStorage";
 
 const Form = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const { booking } = useChatStore();
 
   // Pre-fill form with chatStore data
@@ -104,6 +110,11 @@ const Form = () => {
 
     setIsLoading(true);
 
+    setTimeout(() => {
+      setIsLoading(false);
+      toast.success("Message sent successfully! We will get back to you soon.");
+    }, 1500);
+
     try {
       const result = await fetch("/api/contact", {
         method: "POST",
@@ -118,7 +129,6 @@ const Form = () => {
           data.error || "Something went wrong. Please try again later.",
         );
       }
-      toast.success("Message sent successfully! We will get back to you soon.");
 
       // Clear form after successful submission
       setFormData({
@@ -133,10 +143,43 @@ const Form = () => {
       console.error("Error:", error);
       toast.error("Something went wrong. Please try again later.");
       return;
-    } finally {
-      setIsLoading(false);
     }
   };
+
+  if (!mounted)
+    return (
+      <div className="space-y-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <div className="skeleton h-4 w-20 mb-1.5 rounded" />
+            <div className="skeleton h-11 w-full rounded-lg" />
+          </div>
+          <div>
+            <div className="skeleton h-4 w-20 mb-1.5 rounded" />
+            <div className="skeleton h-11 w-full rounded-lg" />
+          </div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <div className="skeleton h-4 w-14 mb-1.5 rounded" />
+            <div className="skeleton h-11 w-full rounded-lg" />
+          </div>
+          <div>
+            <div className="skeleton h-4 w-14 mb-1.5 rounded" />
+            <div className="skeleton h-11 w-full rounded-lg" />
+          </div>
+        </div>
+        <div>
+          <div className="skeleton h-4 w-20 mb-1.5 rounded" />
+          <div className="skeleton h-11 w-full rounded-lg" />
+        </div>
+        <div>
+          <div className="skeleton h-4 w-28 mb-1.5 rounded" />
+          <div className="skeleton h-16 w-full rounded-lg" />
+        </div>
+        <div className="skeleton h-11 w-full rounded-lg" />
+      </div>
+    );
 
   return (
     <form

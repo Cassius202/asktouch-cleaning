@@ -30,6 +30,6 @@ export async function handleContactUpload(data: EmailData) {
 
   return {
     success: true,
-    message: "Thank you, Ma/Sir! Your message has been received."
+    message: "Thank you, Your message has been received."
   };
 };

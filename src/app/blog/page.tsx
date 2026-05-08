@@ -5,7 +5,7 @@ import { fetchBlogs } from '@/app/actions/fetchBlogs';
 import BlogsClient from './_components/BlogsClient';
 
 // ADD THIS SINGLE LINE - caches page for 
-export const revalidate = 60 * 30;
+// export const revalidate = 60 * 30;
 
 export const metadata: Metadata = {
   title: 'Blog - Thoughts, Stories, and Ideas',
