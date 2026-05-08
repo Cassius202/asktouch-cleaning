@@ -110,7 +110,7 @@ export default function DashboardPage() {
         <a
           href={assets.qrCodeLocation}
           download="asktouch-review-qr.png"
-          className="w-full sm:w-[200px] text-center text-xs font-medium text-white bg-emerald-600 hover:bg-emerald-700 transition-colors px-4 py-2 rounded-lg"
+          className="w-full sm:w-50 text-center text-xs font-medium text-white bg-emerald-600 hover:bg-emerald-700 transition-colors px-4 py-2 rounded-lg"
         >
           Download QR Code
         </a>

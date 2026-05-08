@@ -1,11 +1,9 @@
 // app/blog/page.tsx
 import { Metadata } from 'next';
 import { Suspense } from 'react';
-import { fetchBlogs } from '@/app/actions/fetchBlogs';
+// We use getBlogs from your new service file
+import { getBlogs } from '@/lib/blog-service'; 
 import BlogsClient from './_components/BlogsClient';
-
-// ADD THIS SINGLE LINE - caches page for 
-// export const revalidate = 60 * 30;
 
 export const metadata: Metadata = {
   title: 'Blog - Thoughts, Stories, and Ideas',
@@ -34,13 +32,18 @@ function BlogsLoading() {
 }
 
 async function BlogContent() {
-  const initialResult = await fetchBlogs();
+  // Call the new service (no 'use server' overhead, safe for production)
+  const result = await getBlogs();
   
+  // Your BlogsClient expects initialBlogs, initialHasMore, and initialError.
+  // Since our new service handles the try/catch internally:
   return (
     <BlogsClient 
-      initialBlogs={initialResult.success ? initialResult.data || [] : []}
-      initialHasMore={initialResult.success ? initialResult.hasMore || false : false}
-      initialError={!initialResult.success ? initialResult.error : undefined}
+      initialBlogs={result.data || []}
+      initialHasMore={result.hasMore || false}
+      // If data is empty and there's no more, we could pass an error string 
+      // or just keep it undefined as the service handles errors gracefully.
+      initialError={undefined} 
     />
   );
 }

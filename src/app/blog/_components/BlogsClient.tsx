@@ -4,7 +4,6 @@ import toast from 'react-hot-toast';
 import Header from "./Header";
 import { useEffect, useState, useCallback } from "react";
 import { Blog } from "@/constants/types";
-import { fetchBlogs } from '@/app/actions/fetchBlogs';
 import { assets } from '@/constants/assets';
 import Link from 'next/link';
 import Image from 'next/image';
