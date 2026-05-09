@@ -63,6 +63,7 @@ export const BlogContents = ({ blog }: { blog: Blog }) => {
                 src={blog.image}
                 alt={blog.title}
                 fill
+                unoptimized
                 className="object-cover"
               />
             </div>

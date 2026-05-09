@@ -53,3 +53,18 @@ export async function getBlogs(cursor?: string) {
     return { data: [], nextCursor: undefined, hasMore: false };
   }
 }
+
+export async function getAllBlogIds() {
+  try {
+    const { data, error } = await supabase
+      .from('blogs')
+      .select('id')
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+    return data as { id: string }[];
+  } catch (error) {
+    console.error('Error in getAllBlogIds:', error);
+    return [];
+  }
+}
