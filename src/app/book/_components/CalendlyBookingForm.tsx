@@ -131,16 +131,13 @@ const handleSubmit = async (e: React.FormEvent) => {
   return (
     <div className="w-full mx-auto max-w-md xl:max-w-lg p-4 sm:p-8 bg-white rounded-3xl shadow-xl shadow-emerald-900/5 border border-emerald-50">
       <div className="mb-8 text-center">
-        <div className="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-4 max-md:hidden">
-          <Calendar className="w-6 h-6 text-emerald-600" />
-        </div>
         <h3 className="text-2xl font-bold text-zinc-900">Book a Consultation</h3>
         <p className="text-zinc-500 text-sm mt-2">
           Schedule a video call for more personalized and efficient communication.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-2">
         {/* Full Name */}
         <div className="space-y-1">
           <label className="text-xs font-bold text-zinc-700 ml-1">FULL NAME *</label>

@@ -125,10 +125,10 @@ export default function WhatsAppForm({ formData, setFormData }: FormProps) {
       <form onSubmit={handleSubmit} className="space-y-6">
         {step === 1 ? (
           <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-            <h3 className="text-2xl font-bold text-zinc-900 mb-6">
+            <h3 className="text-2xl font-bold text-zinc-900 mb-5">
               Work Details
             </h3>
-            <div className="space-y-4">
+            <div className="space-y-3">
               <div>
                 <label className="text-sm font-semibold text-zinc-700">
                   Service Required *
