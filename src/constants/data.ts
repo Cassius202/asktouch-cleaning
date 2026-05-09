@@ -10,7 +10,7 @@ export const askTouchData = {
     instagram: "https://www.instagram.com/asktouchgeneralcleaning?igsh=cDI5OXc0MDE0M2Zo&utm_source=qr",
     twitter: "https://x.com/Dgudbahdboy?s=20",
     tiktok: "www.tiktok.com/@asktouchcleaningservices",
-    },
+  },
   services: [
     "Residential & Office Cleaning",
     "Pest Control & Fumigation",
@@ -27,7 +27,7 @@ export const askTouchData = {
   cta: "Schedule Your Service Today!",
   visual_assets: {
     primary_colors: {
-      green: "#2E8B57", 
+      green: "#2E8B57",
       blue: "#003366",  // Estimated from the logo text
       yellow: "#FFFF00" // Highlight bar color
     }
@@ -57,7 +57,7 @@ export const team = [
     role: "Residential Care Lead",
     image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=800&auto=format&fit=crop&q=60", // Friendly professional man
   },
-]; 
+];
 
 export const info = {
   name: 'Ask Touch Cleaning & Fumigation',
@@ -69,6 +69,7 @@ export const info = {
   contactEmail: 'hello@mail.asktouchcleaning.name.ng',
   phone: '+2349034027582',
   calendlyLink: "https://calendly.com/asktouch39/30min",
-  reviewLink: "https://g.page/r/CdTMIh5nvJmKEBM/review",
+  reviewLink: "https://www.google.com/url?sa=E&q=https%3A%2F%2Fwww.google.com%2Fsearch%3Fq%3DAsk%2BTouch%2BGeneral%2BCleaning%2Bservice%23lrd%3D0x6c7e932e3d25a619%3A0xbd534e0e0fbef19a%2C3%2C1",
   businessProfileLink: 'https://share.google/4vVmsQLXzeqpVcioa'
 }
+

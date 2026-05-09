@@ -56,8 +56,7 @@ const Header = () => {
         >
           {/* Logo */}
           <Link href="/" className="shrink-0">
-            <Image src={assets.logoGrayscale} alt="logo" width={32} height={32} className={`h-7 md:h-8 w-auto ${isHomePage && !isScrolled ? 'brightness-0 invert' : ''}`}
-            sizes='32px'
+            <Image src={assets.logoGrayscale} alt="logo" className={`h-7 md:h-8 w-auto ${isHomePage && !isScrolled ? 'brightness-0 invert' : ''}`}
             priority
             />
           </Link>

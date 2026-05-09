@@ -21,7 +21,7 @@ function ClientLoader({ children }: { children: React.ReactNode }) {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.03, // Speed of typing (lower = faster)
+        staggerChildren: 0.05, // Speed of typing (lower = faster)
         delayChildren: 0.6,    // Wait for logo to start/finish
       },
     },
@@ -54,8 +54,8 @@ function ClientLoader({ children }: { children: React.ReactNode }) {
             <Image
               src={assets.logo}
               alt="Logo"
-              width={110}
-              height={110}
+              width={100}
+              height={100}
             />
           </motion.div>
 
@@ -64,7 +64,7 @@ function ClientLoader({ children }: { children: React.ReactNode }) {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="text-5xl font-semibold ml-4 text-slate-900 flex"
+            className="text-4xl font-semibold ml-4 text-slate-900 flex"
           >
             {text.split("").map((char, index) => (
               <motion.span key={index} variants={letterVariants}>
