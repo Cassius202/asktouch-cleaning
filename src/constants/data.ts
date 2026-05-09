@@ -69,7 +69,7 @@ export const info = {
   contactEmail: 'hello@mail.asktouchcleaning.name.ng',
   phone: '+2349034027582',
   calendlyLink: "https://calendly.com/asktouch39/30min",
-  reviewLink: "https://www.google.com/url?sa=E&q=https%3A%2F%2Fwww.google.com%2Fsearch%3Fq%3DAsk%2BTouch%2BGeneral%2BCleaning%2Bservice%23lrd%3D0x6c7e932e3d25a619%3A0xbd534e0e0fbef19a%2C3%2C1",
+  reviewLink: "https://g.page/r/CZrxvg8OTlO9EBM/review",
   businessProfileLink: 'https://share.google/4vVmsQLXzeqpVcioa'
 }
 
