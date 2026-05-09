@@ -24,7 +24,7 @@ export default async function BlogPage({ params }: { params: Promise<{ id: strin
   const { id } = await params;
   const blog = await getBlogById(id);
 
-  if (!blog) return <ErrorPage />;
+  if (blog === null || !id) return <ErrorPage />;
 
   return <BlogContents blog={blog} />;
 }
