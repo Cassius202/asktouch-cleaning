@@ -4,7 +4,7 @@ export const BlogMarkdown = ({ html }: { html: string }) => {
   const sanitizedHtml = DOMPurify.sanitize(html);
 
   return (
-    <div className="md:px-4">
+    <div className="px-4">
       <div
       className="
         prose prose-sm sm:prose-base lg:prose-lg max-w-none

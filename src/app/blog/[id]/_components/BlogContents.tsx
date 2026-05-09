@@ -37,7 +37,7 @@ export const BlogContents = ({ blog }: { blog: Blog }) => {
 
       {/* ── HERO ── */}
       <div className="w-full border-stone-200 global-padding">
-        <div className="max-w-4xl mx-auto px-4 pt-10 pb-8">
+        <div className="max-w-4xl mx-auto pt-10 pb-8">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-stone-900 leading-tight tracking-tight mb-4">
             {blog.title}
           </h1>
@@ -57,7 +57,7 @@ export const BlogContents = ({ blog }: { blog: Blog }) => {
 
         {/* Cover image */}
         {blog.image && (
-          <div className="max-w-3xl lg:max-w-4xl  mx-auto px-4 pb-0">
+          <div className="max-w-3xl lg:max-w-4xl  mx-auto pb-0">
             <div className="relative w-full aspect-[16/7] rounded-t-xl overflow-hidden">
               <Image
                 src={blog.image}

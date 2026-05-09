@@ -27,6 +27,7 @@ export default function HealthySpacesPage() {
               src="https://nsqgfrsugkvsftnffeno.supabase.co/storage/v1/object/public/images/image-done.jpg"
               alt="Professional Cleaning"
               fill
+              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
               className="object-cover transition-transform duration-500 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
@@ -51,6 +52,7 @@ export default function HealthySpacesPage() {
               src="https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?q=80&w=2030&auto=format&fit=crop"
               alt="Pest Control and Fumigation"
               fill
+              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
               className="object-cover transition-transform duration-500 group-hover:scale-110"
             />
              <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full flex items-center gap-2">
