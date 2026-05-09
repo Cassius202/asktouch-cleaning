@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useState, useRef, useEffect, SetStateAction, Dispatch } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,15 +10,23 @@ import { assets } from "@/constants/assets";
 import Image from "next/image";
 import { cn } from "@/utils/cn";
 import { updateBookingData } from "./updateBookingData";
-import {usePathname} from 'next/navigation'
+import { usePathname } from "next/navigation";
 
 const botImage = assets.chatbotImage;
 const whatsappBg = assets.whatsappBg; // Background pattern image
 
-type Message = { role: 'user' | 'ai'; content: string; isError?: boolean };
+type Message = { role: "user" | "ai"; content: string; isError?: boolean };
 
 // ── TextArea ───────────────────────────────────────────
-export const TextArea = ({ messages, loading, setIsOpen }: { messages: Message[]; loading: boolean; setIsOpen: Dispatch<SetStateAction<boolean>>; }) => {
+export const TextArea = ({
+  messages,
+  loading,
+  setIsOpen,
+}: {
+  messages: Message[];
+  loading: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+}) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -29,19 +37,20 @@ export const TextArea = ({ messages, loading, setIsOpen }: { messages: Message[]
     <div className="flex-1 relative overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <Image 
-          alt='whatsapp-bg' 
-          src={whatsappBg} 
-          fill 
+        <Image
+          alt="whatsapp-bg"
+          src={whatsappBg}
+          fill
+          sizes="100%"
           className="object-cover"
-          style={{ objectPosition: 'top' }}
+          style={{ objectPosition: "top" }}
         />
         <div className="absolute inset-0 bg-emerald-50/10" />
       </div>
 
       {/* Chat Content */}
-      <div 
-        ref={scrollRef} 
+      <div
+        ref={scrollRef}
         className="relative z-10 h-full overflow-y-auto p-4 space-y-4 scrollbar-hide"
       >
         {messages.length === 0 && (
@@ -50,7 +59,9 @@ export const TextArea = ({ messages, loading, setIsOpen }: { messages: Message[]
               <User className="w-5 h-5 text-emerald-500" />
             </div>
             <div>
-              <p className="text-zinc-900 font-semibold text-lg">I&apos;m Portia.</p>
+              <p className="text-zinc-900 font-semibold text-lg">
+                I&apos;m Portia.
+              </p>
               <p className="text-emerald-700 text-[10px] uppercase tracking-[0.2em] font-bold mt-1">
                 Ask Touch Concierge
               </p>
@@ -59,20 +70,31 @@ export const TextArea = ({ messages, loading, setIsOpen }: { messages: Message[]
         )}
 
         {messages.map((msg, i) => (
-          <div key={i} className={cn("flex gap-2.5", msg.role === 'user' ? 'justify-end' : 'justify-start')}>
-            {msg.role === 'ai' && (
+          <div
+            key={i}
+            className={cn(
+              "flex gap-2.5",
+              msg.role === "user" ? "justify-end" : "justify-start",
+            )}
+          >
+            {msg.role === "ai" && (
               <div className="relative w-7 h-7 rounded-full overflow-hidden shrink-0 mt-1 border border-white shadow-sm">
-                <Image src={botImage} alt="Portia" fill className="object-cover" />
+                <Image
+                  src={botImage}
+                  alt="Portia"
+                  fill
+                  className="object-cover"
+                />
               </div>
             )}
             <div
               className={cn(
                 "max-w-[85%] px-4 py-2 text-[13.5px] leading-relaxed shadow-sm",
-                msg.role === 'user'
-                  ? 'bg-[#dcf8c6] text-zinc-800 rounded-lg rounded-tr-none'
+                msg.role === "user"
+                  ? "bg-[#dcf8c6] text-zinc-800 rounded-lg rounded-tr-none"
                   : msg.isError
-                    ? 'bg-red-50 text-red-600 border border-red-100 rounded-lg'
-                    : 'bg-white text-zinc-800 rounded-lg rounded-tl-none'
+                    ? "bg-red-50 text-red-600 border border-red-100 rounded-lg"
+                    : "bg-white text-zinc-800 rounded-lg rounded-tl-none",
               )}
             >
               <MarkdownText text={msg.content} setIsOpen={setIsOpen} />
@@ -83,7 +105,12 @@ export const TextArea = ({ messages, loading, setIsOpen }: { messages: Message[]
         {loading && (
           <div className="flex justify-start gap-2.5">
             <div className="relative w-7 h-7 rounded-full overflow-hidden shrink-0 mt-1 border border-white">
-              <Image src={botImage} alt="Portia" fill className="object-cover" />
+              <Image
+                src={botImage}
+                alt="Portia"
+                fill
+                className="object-cover"
+              />
             </div>
             <div className="bg-white px-4 py-3 rounded-lg rounded-tl-none flex gap-1 items-center shadow-sm">
               <div className="size-1 bg-emerald-400 rounded-full animate-bounce" />
@@ -99,7 +126,7 @@ export const TextArea = ({ messages, loading, setIsOpen }: { messages: Message[]
 
 // ── ChatHolder ─────────────────────────────────────────
 const ChatHolder = () => {
-  const pathname = usePathname()
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useSessionStorage<Message[]>("chats", []);
   const [input, setInput] = useState("");
@@ -119,104 +146,108 @@ const ChatHolder = () => {
     };
   }, []);
 
-  const handleReset = () => { if(confirm("Clear chat history?")) setMessages([]); }
+  const handleReset = () => {
+    if (confirm("Clear chat history?")) setMessages([]);
+  };
 
+  const handleSend = async () => {
+    // 1. Validation: Don't send if empty, loading, or offline
+    if (!input.trim() || loading || !isOnline) return;
 
-const handleSend = async () => {
-  // 1. Validation: Don't send if empty, loading, or offline
-  if (!input.trim() || loading || !isOnline) return;
+    // 2. Add the User's message to the UI immediately
+    const userMsg: Message = { role: "user", content: input };
+    const newMessages = [...messages, userMsg];
+    setMessages(newMessages);
+    setInput("");
+    setLoading(true);
 
-  // 2. Add the User's message to the UI immediately
-  const userMsg: Message = { role: 'user', content: input };
-  const newMessages = [...messages, userMsg];
-  setMessages(newMessages);
-  setInput("");
-  setLoading(true);
+    try {
+      const cleanedHistory = messages
+        .filter((m) => m.content && !m.isError)
+        .slice(-10) // Only last 10 messages
+        .map((m) => ({
+          role: m.role === "user" ? "user" : "model",
+          parts: [
+            {
+              text: m.content.replace(/```json[\s\S]*?```/g, "").trim(),
+            },
+          ],
+        }));
 
-  try {
-    const cleanedHistory = messages
-      .filter((m) => m.content && !m.isError)
-      .slice(-10) // Only last 10 messages
-      .map((m) => ({
-        role: m.role === 'user' ? 'user' : 'model',
-        parts: [{ 
-          text: m.content.replace(/```json[\s\S]*?```/g, "").trim() 
-        }],
-      }));
+      // 4. Call the API
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          prompt: input,
+          history: cleanedHistory,
+          metadata: leadData, // We send the current name/gender facts back to the AI
+        }),
+      });
 
-    // 4. Call the API
-    const res = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        prompt: input,
-        history: cleanedHistory,
-        metadata: leadData, // We send the current name/gender facts back to the AI
-      }),
-    });
+      const data = await res.json();
+      if (!res.ok || !data.text) throw new Error(data.error || "AI_DOWN");
 
-    const data = await res.json();
-    if (!res.ok || !data.text) throw new Error(data.error || "AI_DOWN");
+      // 5. PARSE THE RESPONSE
 
-    // 5. PARSE THE RESPONSE
-    
-    const fullAIContent = data.text;
-    
-    // Regex to find the ```json { ... } ``` block
-    const jsonRegex = /```json\s*([\s\S]*?)\s*```/;
-    const match = fullAIContent.match(jsonRegex);
-    
-    let cleanText = fullAIContent;
-    let extractedJson = null;
+      const fullAIContent = data.text;
 
-    if (data.jsonData) {
-      updateBookingData(data.jsonData);
-    }
+      // Regex to find the ```json { ... } ``` block
+      const jsonRegex = /```json\s*([\s\S]*?)\s*```/;
+      const match = fullAIContent.match(jsonRegex);
 
-    if (match) {
-      try {
-        // Extract and Parse the JSON part
-        extractedJson = JSON.parse(match[1]);
-        
-        // Remove the JSON block from the text so the user never sees it
-        cleanText = fullAIContent.replace(jsonRegex, "").trim();
-      } catch (parseError) {
-        console.error("Could not parse AI JSON:", parseError);
+      let cleanText = fullAIContent;
+      let extractedJson = null;
+
+      if (data.jsonData) {
+        updateBookingData(data.jsonData);
       }
-    }
 
-    // 6. UPDATE STATES
-    if (extractedJson) {
-      // This is how the AI "remembers" the name for the next message
-      setLeadData(extractedJson);
-      
-      // OPTIONAL: If the AI says the lead is ready, you could trigger a popup here
-      if (extractedJson.is_lead_ready) {
-        console.log("User is ready to book!");
+      if (match) {
+        try {
+          // Extract and Parse the JSON part
+          extractedJson = JSON.parse(match[1]);
+
+          // Remove the JSON block from the text so the user never sees it
+          cleanText = fullAIContent.replace(jsonRegex, "").trim();
+        } catch (parseError) {
+          console.error("Could not parse AI JSON:", parseError);
+        }
       }
+
+      // 6. UPDATE STATES
+      if (extractedJson) {
+        // This is how the AI "remembers" the name for the next message
+        setLeadData(extractedJson);
+
+        // OPTIONAL: If the AI says the lead is ready, you could trigger a popup here
+        if (extractedJson.is_lead_ready) {
+          console.log("User is ready to book!");
+        }
+      }
+
+      // Add the clean, friendly text to the chat UI
+      setMessages([...newMessages, { role: "ai", content: cleanText }]);
+    } catch (err: any) {
+      console.error("Chat Error:", err);
+      setMessages([
+        ...newMessages,
+        {
+          role: "ai",
+          content:
+            "**I am busy now at the station, I'll have someone call you now. What is your number?**",
+          isError: true,
+        },
+      ]);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    // Add the clean, friendly text to the chat UI
-    setMessages([...newMessages, { role: 'ai', content: cleanText }]);
+  const isBookingPage = pathname === "/book-now" || pathname === "/book";
 
-  } catch (err: any) {
-    console.error("Chat Error:", err);
-    setMessages([
-      ...newMessages,
-      { 
-        role: 'ai', 
-        content: "**I am busy now at the station, I'll have someone call you now. What is your number?**", 
-        isError: true 
-      },
-    ]);
-  } finally {
-    setLoading(false);
-  }
-};
-
-  const isBookingPage = pathname === '/book-now' || pathname === '/book'
-
-  if (isBookingPage || pathname.startsWith("/admin") || pathname === '/admin') return null
+  if (isBookingPage || pathname.startsWith("/admin") || pathname === "/admin")
+    return null;
 
   return (
     <div className="fixed bottom-6 right-6 max-sm:right-4 z-[200] flex flex-col items-end">
@@ -232,48 +263,77 @@ const handleSend = async () => {
             <div className="bg-emerald-600 px-4 py-3 flex items-center justify-between shrink-0 shadow-md">
               <div className="flex items-center gap-3">
                 <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-white/20 shrink-0">
-                  <Image src={botImage} alt="Portia" fill className="object-cover" />
+                  <Image
+                    src={botImage}
+                    alt="Portia"
+                    fill
+                    sizes="40px"
+                    className="object-cover"
+                  />
                 </div>
                 <div>
-                  <p className="text-white text-sm font-bold leading-snug">Portia</p>
+                  <p className="text-white text-sm font-bold leading-snug">
+                    Portia
+                  </p>
                   <p className="text-[11px] text-emerald-100 flex items-center gap-1.5 font-medium">
-                    <span className={cn("w-2 h-2 rounded-full", isOnline ? "bg-emerald-300 animate-pulse" : "bg-red-400")} />
+                    <span
+                      className={cn(
+                        "w-2 h-2 rounded-full",
+                        isOnline
+                          ? "bg-emerald-300 animate-pulse"
+                          : "bg-red-400",
+                      )}
+                    />
                     {isOnline ? "Online" : "Offline"}
                   </p>
                 </div>
               </div>
               <div className="flex items-center gap-1">
-                <button onClick={handleReset} className="text-white/70 hover:text-white transition-colors p-2">
+                <button
+                  onClick={handleReset}
+                  className="text-white/70 hover:text-white transition-colors p-2"
+                >
                   <Trash2 size={18} />
                 </button>
-                <button onClick={() => setIsOpen(false)} className="text-white/70 hover:text-white transition-colors p-2">
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="text-white/70 hover:text-white transition-colors p-2"
+                >
                   <X size={20} />
                 </button>
               </div>
             </div>
 
-            <TextArea messages={messages} loading={loading} setIsOpen={setIsOpen} />
+            <TextArea
+              messages={messages}
+              loading={loading}
+              setIsOpen={setIsOpen}
+            />
 
             {/* Input Bar */}
             <div className="px-3 py-3 border-t border-zinc-200 bg-[#f0f0f0]">
               <div className="flex gap-2 items-center">
                 <div className="flex-1 bg-white rounded-full px-4 py-2 flex items-center shadow-sm border border-zinc-200">
-                    <input
+                  <input
                     type="text"
                     value={input}
                     disabled={!isOnline || loading}
                     onChange={(e) => setInput(e.target.value)}
-                    onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+                    onKeyDown={(e) => e.key === "Enter" && handleSend()}
                     placeholder="Type a message"
                     className="w-full bg-transparent text-sm outline-none text-zinc-900 placeholder:text-zinc-500"
-                    />
+                  />
                 </div>
                 <button
                   onClick={handleSend}
                   disabled={loading || !isOnline || !input.trim()}
                   className="bg-emerald-600 text-white p-3 rounded-full transition-all active:scale-90 shadow-md disabled:bg-zinc-400"
                 >
-                  {loading ? <Loader2 className="animate-spin" size={18} /> : <Send size={18} className="translate-x-0.5" />}
+                  {loading ? (
+                    <Loader2 className="animate-spin" size={18} />
+                  ) : (
+                    <Send size={18} className="translate-x-0.5" />
+                  )}
                 </button>
               </div>
             </div>
@@ -303,13 +363,17 @@ const handleSend = async () => {
           whileTap={{ scale: 0.92 }}
           className={cn(
             "relative p-4 rounded-full shadow-lg transition-colors",
-            isOpen ? "bg-zinc-800 text-white" : "bg-[#25D366] text-white"
+            isOpen ? "bg-zinc-800 text-white" : "bg-[#25D366] text-white",
           )}
         >
           <AnimatePresence mode="wait">
-            {isOpen ? <X key="x" size={24} /> : <FaWhatsapp key="whatsapp" size={28} className="hue-rotate-50" />}
+            {isOpen ? (
+              <X key="x" size={24} />
+            ) : (
+              <FaWhatsapp key="whatsapp" size={28} className="hue-rotate-50" />
+            )}
           </AnimatePresence>
-          
+
           <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-zinc-800 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
             {isOpen ? "Close" : "Chat with Portia"}
           </span>
