@@ -36,6 +36,11 @@ const nextConfig: NextConfig = {
         destination: '/book',
         permanent: true,
       },
+      {
+        source: '/blogs',
+        destination: '/blog',
+        permanent: true,
+      },
     ];
   },
   // next.config.ts
